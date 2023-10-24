@@ -20,6 +20,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
                       children: [
@@ -40,7 +41,20 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 50,),
+                        Container(
+                          height: size.height * 0.8,
+                          width: size.width / 4,
+                          decoration: BoxDecoration(
+                            color: dtlBlack.withOpacity(0.5),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],
