@@ -1,3 +1,4 @@
+import 'package:datalytics/constants.dart';
 import 'package:datalytics/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: dtlGreyBlue),
         useMaterial3: true,
       ),
       home: const WelcomeScreen(),
