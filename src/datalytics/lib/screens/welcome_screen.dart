@@ -14,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            'assets/images/background-img.png',
+            'assets/images/background_robo.png',
             fit: BoxFit.fill,
             height: size.height,
             width: size.width,
