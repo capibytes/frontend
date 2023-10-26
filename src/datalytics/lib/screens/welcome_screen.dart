@@ -1,6 +1,7 @@
 import 'package:datalytics/components/labeled_button.dart';
 import 'package:datalytics/components/main_button.dart';
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/textos.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -95,6 +96,49 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 30,),
+                Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Qual o segredo da',
+                        style: TextStyle(
+                          color: dtlWhite,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const Text(
+                        'Governaça de dados',
+                        style: TextStyle(
+                          color: dtlWhite,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: size.height * 0.02,),
+                      Container(
+                        width: size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: dtlBlack.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.08,
+                            vertical: 20,
+                          ),
+                          child: const Text(
+                            welcomeText,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              color: dtlWhite,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
