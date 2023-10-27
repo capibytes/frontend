@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class CustomFormField extends StatelessWidget {
   final String labelText;
+  final String? Function(String?)? validate;
   const CustomFormField({
     required this.labelText,
+    this.validate,
     super.key
   });
 
@@ -14,6 +16,7 @@ class CustomFormField extends StatelessWidget {
     return SizedBox(
       width: (size.width / 4) - 60,
       child: TextFormField(
+        validator: validate,
         style: const TextStyle(
           color: dtlWhite,
         ),
