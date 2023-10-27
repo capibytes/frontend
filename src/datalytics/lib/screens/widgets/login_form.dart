@@ -19,6 +19,16 @@ class LoginForm extends StatelessWidget {
     return null;
   }
 
+  String? validatePassword(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Este campo é obrigatório*';
+    }
+    if (value.trim().length < 8){
+      return 'Deve conter ao menos 8 caracteres';
+    }
+    return null;
+  }
+
   void submitForm() {
     if(_formKey.currentState!.validate()){
       print('Formulario validado');
@@ -39,7 +49,10 @@ class LoginForm extends StatelessWidget {
                 validate: validateEmail,
               ),
               const SizedBox(height: 16,),
-              const CustomFormField(labelText: 'Senha'),
+              CustomFormField(
+                labelText: 'Senha',
+                validate: validatePassword,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
