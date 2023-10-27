@@ -51,7 +51,16 @@ class LoginForm extends StatelessWidget {
               const SizedBox(height: 16,),
               CustomFormField(
                 labelText: 'Senha',
+                hideText: true,
                 validate: validatePassword,
+                suffix: IconButton(
+                  onPressed: (){},
+                  icon: const Icon(
+                    Icons.remove_red_eye_outlined,
+                    size: 14,
+                    color: dtlGrey100,
+                  ),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
