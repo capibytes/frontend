@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class CustomFormField extends StatelessWidget {
   final String labelText;
+  final bool hideText;
   final String? Function(String?)? validate;
   const CustomFormField({
     required this.labelText,
     this.validate,
+    this.hideText = false,
     super.key
   });
 
@@ -20,6 +22,7 @@ class CustomFormField extends StatelessWidget {
         style: const TextStyle(
           color: dtlWhite,
         ),
+        obscureText: hideText,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
