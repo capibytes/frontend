@@ -19,6 +19,12 @@ class LoginForm extends StatelessWidget {
     return null;
   }
 
+  void submitForm() {
+    if(_formKey.currentState!.validate()){
+      print('Formulario validado');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +67,7 @@ class LoginForm extends StatelessWidget {
           borderRadius: 8,
           height: 40,
           width: 120,
-          onPress: (){},
+          onPress: submitForm,
         ),
       ],
     );
