@@ -13,6 +13,11 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  bool hidePassword = true;
+
+  void hideOrShowPasswordText(){
+    setState(() => hidePassword = !hidePassword,);
+  }
 
   String? validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -55,10 +60,10 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(height: 16,),
               CustomFormField(
                 labelText: 'Senha',
-                hideText: true,
+                hideText: hidePassword,
                 validate: validatePassword,
                 suffix: IconButton(
-                  onPressed: (){},
+                  onPressed: hideOrShowPasswordText,
                   icon: const Icon(
                     Icons.remove_red_eye_outlined,
                     size: 14,
