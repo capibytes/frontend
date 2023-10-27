@@ -64,8 +64,8 @@ class _LoginFormState extends State<LoginForm> {
                 validate: validatePassword,
                 suffix: IconButton(
                   onPressed: hideOrShowPasswordText,
-                  icon: const Icon(
-                    Icons.remove_red_eye_outlined,
+                  icon: Icon(
+                    hidePassword ? Icons.remove_red_eye_outlined : Icons.remove_red_eye,
                     size: 14,
                     color: dtlGrey100,
                   ),
