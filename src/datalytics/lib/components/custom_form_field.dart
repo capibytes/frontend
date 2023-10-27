@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class CustomFormField extends StatelessWidget {
   final String labelText;
   final bool hideText;
+  final Widget? suffix;
   final String? Function(String?)? validate;
   const CustomFormField({
     required this.labelText,
     this.validate,
     this.hideText = false,
+    this.suffix,
     super.key
   });
 
@@ -39,6 +41,7 @@ class CustomFormField extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w400,
           ),
+          suffix: suffix,
         ),
       ),
     );
