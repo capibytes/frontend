@@ -4,9 +4,14 @@ import 'package:datalytics/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
-class LoginForm extends StatelessWidget {
-  LoginForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
   String? validateEmail(String? value) {
@@ -34,7 +39,6 @@ class LoginForm extends StatelessWidget {
       print('Formulario validado');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
