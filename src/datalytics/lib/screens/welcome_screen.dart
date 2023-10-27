@@ -1,5 +1,6 @@
 import 'package:datalytics/constants.dart';
 import 'package:datalytics/screens/widgets/authentication_options.dart';
+import 'package:datalytics/screens/widgets/login_form.dart';
 import 'package:datalytics/textos.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,14 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool isLoginFormVisible = false;
+
+  void showLoginForm() {
+    setState(() {
+      isLoginFormVisible = !isLoginFormVisible;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -63,7 +72,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Image.asset('assets/images/complete-logo.png',),
-                              const AuthenticateOptions(),
+                              isLoginFormVisible ? 
+                                const LoginForm() :
+                              AuthenticateOptions(
+                                onLoginPress: showLoginForm,
+                              ),
                             ],
                           ),
                         ),
