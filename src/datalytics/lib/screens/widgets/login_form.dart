@@ -2,18 +2,36 @@ import 'package:datalytics/components/custom_form_field.dart';
 import 'package:datalytics/components/main_button.dart';
 import 'package:datalytics/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+  LoginForm({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+
+  String? validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Insira um endereço de e-mail';
+    }
+    if (!EmailValidator.validate(value)){
+      return 'E-mail inserido é inválido';
+    }
+    return null;
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Form(
+          key: _formKey,
           child: Column(
             children: [
-              const CustomFormField(labelText: 'E-mail'),
+              CustomFormField(
+                labelText: 'E-mail',
+                validate: validateEmail,
+              ),
               const SizedBox(height: 16,),
               const CustomFormField(labelText: 'Senha'),
               Row(
