@@ -2,6 +2,7 @@ import 'package:datalytics/components/top_bar_button_text_option.dart';
 import 'package:datalytics/constants.dart';
 import 'package:datalytics/screens/blog/blog_screen.dart';
 import 'package:datalytics/screens/consultors/consultor_screen.dart';
+import 'package:datalytics/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -18,12 +19,17 @@ class Header extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Datalytics',
-            style: TextStyle(
-              fontSize: 26,
-              color: dtlGreyBlue,
-              fontWeight: FontWeight.w600,
+          InkWell(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+            },
+            child: const Text(
+              'Datalytics',
+              style: TextStyle(
+                fontSize: 26,
+                color: dtlGreyBlue,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           Row(
