@@ -24,6 +24,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,6 +51,11 @@ class HomeScreen extends StatelessWidget {
                               height: 40,
                             ),
                           ],
+                        ),
+                        Image.asset(
+                          'assets/images/image1-home.png',
+                          width: 240,
+                          height: 180,
                         ),
                       ],
                     ),
