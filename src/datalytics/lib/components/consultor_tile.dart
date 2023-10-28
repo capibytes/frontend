@@ -15,14 +15,14 @@ class ConsultorTile extends StatelessWidget {
     return TextStyle(
       fontSize: fontSize,
       fontWeight: bold ? FontWeight.w400 : FontWeight.normal,
-      color: dtlWhite,
+      color: dtlBlack,
+      overflow: TextOverflow.clip,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 140,
       height: 70,
       child: ListTile(
         onTap: onPress,
@@ -35,7 +35,7 @@ class ConsultorTile extends StatelessWidget {
               ],
               begin: FractionalOffset(0, 0),
               end: FractionalOffset(0, 1),
-              stops: [0, 1],
+              stops: [0.6, 1],
               tileMode: TileMode.clamp,
             ),
             borderRadius: BorderRadius.circular(12),
@@ -47,7 +47,7 @@ class ConsultorTile extends StatelessWidget {
               Image.asset(
                 consultor.avatarUrl,
               ),
-              const SizedBox(width: 14,),
+              const SizedBox(width: 24,),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
