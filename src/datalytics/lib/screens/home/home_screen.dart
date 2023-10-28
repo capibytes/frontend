@@ -2,6 +2,7 @@ import 'package:datalytics/components/gradient_background.dart';
 import 'package:datalytics/components/header.dart';
 import 'package:datalytics/components/main_button.dart';
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/consultors/consultor_screen.dart';
 import 'package:datalytics/textos.dart';
 import 'package:flutter/material.dart';
 
@@ -42,13 +43,22 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 12,),
-                            const MainButton(
+                            MainButton(
                               title: 'Encontrar',
                               buttonColor: dtlGreyBlue,
                               textColor: dtlWhite,
                               borderRadius: 8,
                               width: 120,
                               height: 40,
+                              onPress: (){
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return const ConsultorsScreen();
+                                    } 
+                                  )
+                                );
+                              },
                             ),
                           ],
                         ),
