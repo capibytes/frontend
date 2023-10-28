@@ -1,5 +1,7 @@
 import 'package:datalytics/components/top_bar_button_text_option.dart';
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/blog/blog_screen.dart';
+import 'package:datalytics/screens/consultors/consultor_screen.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -27,10 +29,20 @@ class Header extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const TopBarButtonTextOption(title: 'Blog'),
+              TopBarButtonTextOption(
+                title: 'Blog',
+                onPress: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlogScreen()));
+                },
+              ),
               const TopBarButtonTextOption(title: 'LGPD'),
               const TopBarButtonTextOption(title: 'Sobre'),
-              const TopBarButtonTextOption(title: 'Consultores'),
+              TopBarButtonTextOption(
+                title: 'Consultores',
+                onPress: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ConsultorsScreen()));
+                },
+              ),
               Container(
                 width: 48,
                 height: 48,
