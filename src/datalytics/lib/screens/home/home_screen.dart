@@ -2,6 +2,7 @@ import 'package:datalytics/components/gradient_background.dart';
 import 'package:datalytics/components/header.dart';
 import 'package:datalytics/components/main_button.dart';
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/textos.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,6 +50,39 @@ class HomeScreen extends StatelessWidget {
                               height: 40,
                             ),
                           ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 120,),
+                    const Text(
+                      'Qual a importância da Governança de Dados?',
+                      style: TextStyle(
+                        color: dtlWhite,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 20,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/image2-home.png',
+                          width: 240,
+                          height: 180,
+                        ),
+                        const SizedBox(width: 20,),
+                        SizedBox(
+                          width: (size.width /3) * 2,
+                          child: const Text(
+                            homeImportaceOfGovernaceOfDataText,
+                            maxLines: 12,
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                              color: dtlWhite,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                       ],
                     ),
