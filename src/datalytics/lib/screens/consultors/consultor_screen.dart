@@ -3,6 +3,7 @@ import 'package:datalytics/components/gradient_background.dart';
 import 'package:datalytics/components/header.dart';
 import 'package:datalytics/constants.dart';
 import 'package:datalytics/models/consultor_model.dart';
+import 'package:datalytics/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class ConsultorsScreen extends StatefulWidget {
@@ -140,7 +141,12 @@ class _ConsultorsScreenState extends State<ConsultorsScreen> {
                     ConsultorModel consultor = consultorsFiltered[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: ConsultorTile(consultor: consultor),
+                      child: ConsultorTile(
+                        consultor: consultor,
+                        onPress: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                        },
+                      ),
                     );
                   } 
                 ), 
