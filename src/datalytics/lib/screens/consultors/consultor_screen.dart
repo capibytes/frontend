@@ -32,6 +32,12 @@ class _ConsultorsScreenState extends State<ConsultorsScreen> {
     ConsultorModel(name: 'Josevaldo Soares', job: 'Advogado', type: 'Consultor empresarial', avatarUrl: 'assets/images/consultor_example.png'),
     ConsultorModel(name: 'Clodovico', job: 'Advogado', type: 'Consulto comercial', avatarUrl: 'assets/images/consultor_example.png'),
     ConsultorModel(name: 'Frederikson', job: 'Contador', type: 'Consultor empresarial', avatarUrl: 'assets/images/consultor_example.png'),
+    ConsultorModel(name: 'Josevaldo Soares', job: 'Advogado', type: 'Consultor empresarial', avatarUrl: 'assets/images/consultor_example.png'),
+    ConsultorModel(name: 'Clodovico', job: 'Advogado', type: 'Consulto comercial', avatarUrl: 'assets/images/consultor_example.png'),
+    ConsultorModel(name: 'Frederikson', job: 'Contador', type: 'Consultor empresarial', avatarUrl: 'assets/images/consultor_example.png'),
+    ConsultorModel(name: 'Josevaldo Soares', job: 'Advogado', type: 'Consultor empresarial', avatarUrl: 'assets/images/consultor_example.png'),
+    ConsultorModel(name: 'Clodovico', job: 'Advogado', type: 'Consulto comercial', avatarUrl: 'assets/images/consultor_example.png'),
+    ConsultorModel(name: 'Frederikson', job: 'Contador', type: 'Consultor empresarial', avatarUrl: 'assets/images/consultor_example.png'),
   ];
 
   late List<ConsultorModel> consultorsFiltered;
@@ -135,7 +141,7 @@ class _ConsultorsScreenState extends State<ConsultorsScreen> {
                 child: ListView.builder(
                   shrinkWrap: true,
                   primary: true,
-                  padding: EdgeInsets.only(left: size.width / 4, right: size.width / 4),
+                  padding: EdgeInsets.only(left: size.width / 4, right: size.width / 4, bottom: 18),
                   itemCount: consultorsFiltered.length,
                   itemBuilder: (context, index){
                     ConsultorModel consultor = consultorsFiltered[index];
