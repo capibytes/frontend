@@ -2,12 +2,7 @@ resource "aws_s3_bucket" "frontend" {
   bucket = "${local.app_name}-devs2blu-static-site"
 }
 
-resource "aws_s3_bucket_acl" "frontend_acl" {
-  bucket = aws_s3_bucket.frontend.id
-  acl    = "private"
-}
-
-resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
+resource "aws_s3_bucket_policy" "allow_access_from_cloudfront" {
   bucket = aws_s3_bucket.frontend.id
   policy = data.aws_iam_policy_document.allow_access_from_cloudfront.json
 }
