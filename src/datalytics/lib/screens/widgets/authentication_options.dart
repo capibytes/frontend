@@ -4,7 +4,13 @@ import 'package:datalytics/constants.dart';
 import 'package:flutter/material.dart';
 
 class AuthenticateOptions extends StatelessWidget {
-  const AuthenticateOptions({super.key});
+  final VoidCallback? onLoginPress;
+  final VoidCallback? onSignUpPress;
+  const AuthenticateOptions({
+    this.onLoginPress,
+    this.onSignUpPress,
+    super.key
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class AuthenticateOptions extends StatelessWidget {
             width: (size.width / 4) - 60,
             height: 40,
             borderRadius: 8,
-            onPress: (){},
+            onPress: onLoginPress,
           ), 
         ),
         const SizedBox(height: 20,),
@@ -33,7 +39,7 @@ class AuthenticateOptions extends StatelessWidget {
             width: (size.width / 4) - 60,
             height: 40,
             borderRadius: 8,
-            onPress: (){},
+            onPress: onSignUpPress,
           ), 
         ),
         SizedBox(height: size.height * 0.06,)
