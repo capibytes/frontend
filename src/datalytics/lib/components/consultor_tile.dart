@@ -28,14 +28,14 @@ class ConsultorTile extends StatelessWidget {
         onTap: onPress,
         title: Container(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               colors: [
                 dtlGrey100,
-                dtlBlue800,
+                dtlBrownBlue800.withOpacity(0.4),
               ],
-              begin: FractionalOffset(0, 0),
-              end: FractionalOffset(0, 1),
-              stops: [0.6, 1],
+              begin: const FractionalOffset(0, 0),
+              end: const FractionalOffset(0, 1),
+              stops: const [0.4, 1],
               tileMode: TileMode.clamp,
             ),
             borderRadius: BorderRadius.circular(12),
