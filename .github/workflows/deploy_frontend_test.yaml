@@ -18,6 +18,7 @@ jobs:
           channel: 'stable'
 
       - name: Instalar dependências
+        working-directory: src/datalytics
         run: flutter pub get
 
       - name: Build
