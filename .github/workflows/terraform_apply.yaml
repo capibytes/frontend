@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - terraform
 
 env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
