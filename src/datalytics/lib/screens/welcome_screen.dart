@@ -1,4 +1,5 @@
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/signup/signup_screen.dart';
 import 'package:datalytics/screens/widgets/authentication_options.dart';
 import 'package:datalytics/screens/widgets/login_form.dart';
 import 'package:datalytics/textos.dart';
@@ -76,6 +77,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 const LoginForm() :
                               AuthenticateOptions(
                                 onLoginPress: showLoginForm,
+                                onSignUpPress: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpScreen()));
+                                },
                               ),
                             ],
                           ),
