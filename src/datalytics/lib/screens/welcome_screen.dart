@@ -1,10 +1,25 @@
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/signup/signup_screen.dart';
 import 'package:datalytics/screens/widgets/authentication_options.dart';
+import 'package:datalytics/screens/widgets/login_form.dart';
 import 'package:datalytics/textos.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool isLoginFormVisible = false;
+
+  void showLoginForm() {
+    setState(() {
+      isLoginFormVisible = !isLoginFormVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +73,14 @@ class WelcomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Image.asset('assets/images/complete-logo.png',),
-                              const AuthenticateOptions(),
+                              isLoginFormVisible ? 
+                                const LoginForm() :
+                              AuthenticateOptions(
+                                onLoginPress: showLoginForm,
+                                onSignUpPress: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUpScreen()));
+                                },
+                              ),
                             ],
                           ),
                         ),
