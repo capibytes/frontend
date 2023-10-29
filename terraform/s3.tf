@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "allow_access_from_cloudfront" {
     condition {
       test = "StringEquals"
       variable = "AWS:SourceArn"
-      values = [aws_cloudfront_distribution.frontend_distribution.id]
+      values = [aws_cloudfront_distribution.frontend_distribution.arn]
     }
   }
 }
