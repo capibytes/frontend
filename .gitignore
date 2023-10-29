@@ -52,6 +52,7 @@
 *.tfstate.*.backup
 *.tfstate.backup
 *.tfvars
+*.terraform**
 
 # Arquivos IDEA
 *.iml
