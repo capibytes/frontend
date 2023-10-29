@@ -5,6 +5,10 @@ on:
     branches:
       - deploy
 
+permissions:
+  id-token: write # Permissão para acessar AWS por OpenID
+  contents: read
+
 env:
   AWS_REGION: us-east-1
 
