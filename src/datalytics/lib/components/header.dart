@@ -3,6 +3,7 @@ import 'package:datalytics/constants.dart';
 import 'package:datalytics/screens/blog/blog_screen.dart';
 import 'package:datalytics/screens/consultors/consultor_screen.dart';
 import 'package:datalytics/screens/home/home_screen.dart';
+import 'package:datalytics/screens/userprofile/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -49,17 +50,22 @@ class Header extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ConsultorsScreen()));
                 },
               ),
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: dtlGrey100,
-                  borderRadius: BorderRadius.circular(200),
-                ),
-                child: const Icon(
-                  Icons.person,
-                  size: 32,
-                  color: dtlBlack,
+              InkWell(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserProfileScreen()));
+                },
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: dtlGrey100,
+                    borderRadius: BorderRadius.circular(200),
+                  ),
+                  child: const Icon(
+                    Icons.person,
+                    size: 32,
+                    color: dtlBlack,
+                  ),
                 ),
               ),
             ],
