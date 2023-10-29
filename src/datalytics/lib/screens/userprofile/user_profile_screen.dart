@@ -64,7 +64,7 @@ class UserProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  'E-comerce',
+                                  'E-commerce',
                                   style: TextStyle(
                                     color: dtlWhite,
                                     fontWeight: FontWeight.normal,
