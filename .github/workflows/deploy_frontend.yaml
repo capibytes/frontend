@@ -1,0 +1,36 @@
+name: Deploy frontend
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Instalar dependências
+        working-directory: src/datalytics
+        run: flutter pub get
+
+      - name: Build
+        working-directory: src/datalytics
+        run: flutter build web
+
+      - name: Configurar credenciais AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Push para buscket
+        working-directory: src/datalytics/build/web
+        run: aws s3 sync . ${{ secrets.S3_URI }}
