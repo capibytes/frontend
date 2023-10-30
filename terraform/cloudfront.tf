@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
     domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
     origin_id   = local.s3_origin_id
-    origin_path = "6382786"
+    origin_path = var.CLOUDFRONT_ORIGIN_PATH
   }
 
   enabled             = true

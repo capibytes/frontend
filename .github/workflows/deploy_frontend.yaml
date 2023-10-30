@@ -71,7 +71,7 @@ jobs:
       - name: config tfvars
         working-directory: ${{ env.CONFIG_DIRECTORY }}
         run: |
-          echo "CLOUDFRONT_ORIGIN_PATH=\"${{ needs.build-and-push.outputs.sha_short }}\"" > terraform.tfvars
+          echo "CLOUDFRONT_ORIGIN_PATH=\"/${{ needs.build-and-push.outputs.sha_short }}\"" > terraform.tfvars
           echo "" >> terraform.tfvars
   
       - name: upload config
