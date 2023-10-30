@@ -1,5 +1,12 @@
 import 'package:datalytics/constants.dart';
-import 'package:datalytics/screens/welcome_screen.dart';
+import 'package:datalytics/screens/blog/blog_screen.dart';
+import 'package:datalytics/screens/consultors/consultor_screen.dart';
+import 'package:datalytics/screens/home/home_screen.dart';
+import 'package:datalytics/screens/login/login_screen.dart';
+import 'package:datalytics/screens/logon/logon_screen.dart';
+import 'package:datalytics/screens/signup/signup_screen.dart';
+import 'package:datalytics/screens/userprofile/user_profile_screen.dart';
+import 'package:datalytics/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,13 +19,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Datalytics',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: dtlGreyBlue),
         useMaterial3: true,
       ),
-      home: const WelcomeScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const WelcomeScreen(),
+        '/logon': (context) => const LogOnScreen(),
+        '/login': (context) => const LogInScreen(),
+        '/signup': (context) => const SignUpScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/consultors': (context) => const ConsultorsScreen(),
+        '/blog': (context) => BlogScreen(),
+        '/myprofile': (context) => const UserProfileScreen(),
+      },
     );
   }
 }
