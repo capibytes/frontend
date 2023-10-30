@@ -1,7 +1,7 @@
 import 'package:datalytics/components/consultor_tile.dart';
-import 'package:datalytics/components/gradient_background.dart';
 import 'package:datalytics/components/header.dart';
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/dimensions.dart';
 import 'package:datalytics/models/consultor_model.dart';
 import 'package:datalytics/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -73,94 +73,134 @@ class _ConsultorsScreenState extends State<ConsultorsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        children: [
-          const GradientBackground(),
-          Column(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double maxWidth = constraints.maxWidth;
+        double maxHeight = constraints.maxHeight;
+
+        return Scaffold(
+          body: Stack(
             children: [
-              const Header(),
-              const SizedBox(height: 80,),
-              SizedBox(
-                width: 540,
-                child: TextField(
-                  onEditingComplete: onSearch,
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Encontre por nome, especialidade, etc...',
-                    hintStyle: const TextStyle(
-                      color: dtlGrey100,
-                      fontSize: 14,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: dtlBlack),
-                    ),
-                    suffixIcon:  IconButton(
-                      onPressed: onSearch,
-                      icon: const Icon(Icons.search_outlined),
-                    ),
-                    suffixIconColor: dtlGrey100,
-                  ),
-                ),
+              Image.asset(
+                'assets/images/background-img.png',
+                fit: BoxFit.cover,
+                height: maxHeight,
+                width: maxWidth,
               ),
-              const SizedBox(height: 60,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DropdownMenu(
-                    label: const Text('Categoria'),
-                    controller: categoryController,
-                    dropdownMenuEntries: categories.map<DropdownMenuEntry<String>>((e) {
-                      return DropdownMenuEntry(value: e, label: e);
-                    }).toList(),
-                    onSelected: filterConsultorsByCategory,
-                  ),
-                  const SizedBox(width: 36,),
-                  DropdownMenu(
-                    label: const Text('Profissão'),
-                    controller: jobCategoryController,
-                    dropdownMenuEntries: jobCategories.map<DropdownMenuEntry<String>>((e) {
-                      return DropdownMenuEntry(value: e, label: e);
-                    }).toList(),
-                    onSelected: filterConsultorsByJobCategory,
-                  ),
-                ],
+              Container(
+                height: maxHeight,
+                width: maxWidth,
+                color: dtlBlack.withOpacity(0.7),
               ),
-              const SizedBox(height: 60,),
-              const Text(
-                'Consultores',
-                style: TextStyle(
-                  color: dtlGrey100,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 40,),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  primary: true,
-                  padding: EdgeInsets.only(left: size.width / 4, right: size.width / 4, bottom: 18),
-                  itemCount: consultorsFiltered.length,
-                  itemBuilder: (context, index){
-                    ConsultorModel consultor = consultorsFiltered[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: ConsultorTile(
-                        consultor: consultor,
-                        onPress: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen()));
-                        },
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Header(),
+                    const SizedBox(height: 80,),
+                    SizedBox(
+                      width: maxWidth < mobileWidth ? 300 : 540 ,
+                      child: TextField(
+                        onEditingComplete: onSearch,
+                        controller: searchController,
+                        decoration: InputDecoration(
+                          hintText: 'Encontre por nome, especialidade, etc...',
+                          hintStyle: const TextStyle(
+                            color: dtlGrey100,
+                            fontSize: 14,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: dtlBlack),
+                          ),
+                          suffixIcon:  IconButton(
+                            onPressed: onSearch,
+                            icon: const Icon(Icons.search_outlined),
+                          ),
+                          suffixIconColor: dtlGrey100,
+                        ),
                       ),
-                    );
-                  } 
-                ), 
+                    ),
+                    const SizedBox(height: 60,),
+                    maxWidth < mobileWidth 
+                    ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownMenu(
+                          label: const Text('Categoria'),
+                          controller: categoryController,
+                          dropdownMenuEntries: categories.map<DropdownMenuEntry<String>>((e) {
+                            return DropdownMenuEntry(value: e, label: e);
+                          }).toList(),
+                          onSelected: filterConsultorsByCategory,
+                        ),
+                        const SizedBox(height: 22,),
+                        DropdownMenu(
+                          label: const Text('Profissão'),
+                          controller: jobCategoryController,
+                          dropdownMenuEntries: jobCategories.map<DropdownMenuEntry<String>>((e) {
+                            return DropdownMenuEntry(value: e, label: e);
+                          }).toList(),
+                          onSelected: filterConsultorsByJobCategory,
+                        ),
+                      ],
+                    )
+                    : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DropdownMenu(
+                          label: const Text('Categoria'),
+                          controller: categoryController,
+                          dropdownMenuEntries: categories.map<DropdownMenuEntry<String>>((e) {
+                            return DropdownMenuEntry(value: e, label: e);
+                          }).toList(),
+                          onSelected: filterConsultorsByCategory,
+                        ),
+                        const SizedBox(width: 36,),
+                        DropdownMenu(
+                          label: const Text('Profissão'),
+                          controller: jobCategoryController,
+                          dropdownMenuEntries: jobCategories.map<DropdownMenuEntry<String>>((e) {
+                            return DropdownMenuEntry(value: e, label: e);
+                          }).toList(),
+                          onSelected: filterConsultorsByJobCategory,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 60,),
+                    const Text(
+                      'Consultores',
+                      style: TextStyle(
+                        color: dtlGrey100,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 40,),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: maxWidth < 800 ? EdgeInsets.only(left: size.width * 0.06, right: size.width * 0.06, bottom: 18) : EdgeInsets.only(left: size.width / 4, right: size.width / 4, bottom: 18),
+                      itemCount: consultorsFiltered.length,
+                      itemBuilder: (context, index){
+                        ConsultorModel consultor = consultorsFiltered[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: ConsultorTile(
+                            consultor: consultor,
+                            onPress: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                            },
+                          ),
+                        );
+                      } 
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-        ],
-      ),
+        );
+      }
     );
   }
 }
