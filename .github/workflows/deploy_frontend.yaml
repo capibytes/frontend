@@ -17,7 +17,7 @@ env:
   TF_CLOUD_ORGANIZATION: "capibytes"
   TF_WORKSPACE: "datalytics-backend"
   CONFIG_DIRECTORY: "./terraform"
-
+  SRC_DIRECTORY: "src/datalytics"
 
 jobs:
 
@@ -33,26 +33,14 @@ jobs:
       - name: SHA curto
         id: sha
         run: echo "::set-output name=short::$(git rev-parse --short HEAD)"
-      
-      # Como o deploy sobe uma versão nova no bucket toda vez, é necessário garantir que a config terraform do bucket
-      # esteja atualizada antes de subir os arquivos
-      # Portanto é feito um apply parcial apenas das configs do s3
-      - name: Configura terraform para subir o bucket
-        uses: hashicorp/setup-terraform@v3
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-        
-      - run: terraform init
-      - name: deploy bucket
-        id: terraform-bucket
-        run: terraform apply -target=aws_s3_bucket.frontend -auto-approve
 
+      # Build frontend web e deploy para o bucket
       - name: Instalar dependências
-        working-directory: src/datalytics
+        working-directory: ${{ env.SRC_DIRECTORY }}
         run: flutter pub get
 
       - name: Build
-        working-directory: src/datalytics
+        working-directory: ${{ env.SRC_DIRECTORY }}
         run: flutter build web
 
       - name: Configurar credenciais AWS
@@ -62,11 +50,12 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Push para bucket
-        working-directory: src/datalytics/build/web
+        working-directory: ${{ env.SRC_DIRECTORY }}/build/web
         run: |
           mkdir -p ${{ steps.sha.outputs.short }}
           shopt -s extglob dotglob
           mv !(${{ steps.sha.outputs.short }}) ${{ steps.sha.outputs.short }}/
+          aws s3 sync . ${{ secrets.S3_URI }}
 
     outputs:
       sha_short: ${{ steps.sha.outputs.short }}
