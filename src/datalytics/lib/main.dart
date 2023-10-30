@@ -1,5 +1,5 @@
 import 'package:datalytics/constants.dart';
-import 'package:datalytics/screens/welcome_screen.dart';
+import 'package:datalytics/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
