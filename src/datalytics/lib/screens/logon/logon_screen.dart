@@ -66,7 +66,7 @@ class LogOnScreen extends StatelessWidget {
                                 width: 240,
                                 height: 40,
                                 borderRadius: 8,
-                                onPress: (){},
+                                onPress: () => Navigator.pushNamed(context, '/signup'),
                               ), 
                             ),
                           ],
