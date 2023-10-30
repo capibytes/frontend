@@ -3,9 +3,7 @@ name: Deploy frontend
 on:
   push:
     branches:
-      - main
-    paths:
-      - src
+      - deploy
 
 permissions:
   id-token: write # Permissão para acessar AWS por OpenID
