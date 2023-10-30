@@ -16,7 +16,7 @@ resource "aws_route53_record" "cert_validation" {
 
 resource "aws_route53_record" "datalytics_domain" {
   zone_id = local.datalytics_zone_id
-  name    = "datalytics.devs2blu.dev.br"
+  name    = local.dominio
   type    = "A"
 
   alias {
@@ -28,7 +28,7 @@ resource "aws_route53_record" "datalytics_domain" {
 
 resource "aws_route53_record" "www_datalytics_domain" {
   zone_id = local.datalytics_zone_id
-  name    = "www.datalytics.devs2blu.dev.br"
+  name    = "www.${local.dominio}"
   type    = "A"
 
   alias {
