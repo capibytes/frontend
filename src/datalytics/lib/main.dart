@@ -1,4 +1,5 @@
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/login/login_screen.dart';
 import 'package:datalytics/screens/logon/logon_screen.dart';
 import 'package:datalytics/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const WelcomeScreen(),
         '/logon': (context) => const LogOnScreen(),
+        '/login': (context) => const LogInScreen(),
       },
     );
   }
