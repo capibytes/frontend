@@ -13,8 +13,14 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+  TF_CLOUD_ORGANIZATION: "capibytes"
+  TF_WORKSPACE: "datalytics-backend"
+  CONFIG_DIRECTORY: "./terraform"
+
 
 jobs:
+
   build-and-push:
     runs-on: ubuntu-latest
     steps:
@@ -22,6 +28,24 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
+      # Define uma versão reduzida do hash do commit, que será usada para versionamento dos arquivos no bucket
+      - name: SHA curto
+        id: sha
+        run: echo "::set-output name=short::$(git rev-parse --short HEAD)"
+      
+      # Como o deploy sobe uma versão nova no bucket toda vez, é necessário garantir que a config terraform do bucket
+      # esteja atualizada antes de subir os arquivos
+      # Portanto é feito um apply parcial apenas das configs do s3
+      - name: Configura terraform para subir o bucket
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+        
+      - run: terraform init
+      - name: deploy bucket
+        id: terraform-bucket
+        run: terraform apply -target=aws_s3_bucket.frontend -auto-approve
 
       - name: Instalar dependências
         working-directory: src/datalytics
@@ -37,6 +61,47 @@ jobs:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Push para buscket
+      - name: Push para bucket
         working-directory: src/datalytics/build/web
-        run: aws s3 sync . ${{ secrets.S3_URI }}
+        run: |
+          mkdir -p ${{ steps.sha.outputs.short }}
+          shopt -s extglob dotglob
+          mv !(${{ steps.sha.outputs.short }}) ${{ steps.sha.outputs.short }}/
+
+    outputs:
+      sha_short: ${{ steps.sha.outputs.short }}
+
+  terraform-apply:
+    name: "Terraform Apply"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: config tfvars
+        working-directory: ${{ env.CONFIG_DIRECTORY }}
+        run: echo "CLOUDFRONT_ORIGIN_PATH = ${{ needs.build-and-push.outputs.sha_short }}" > terraform.tfvars
+  
+      - name: upload config
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+        id: tf-upload
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}
+      
+      - name: apply run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+        id: tf-run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.tf-upload.outputs.configuration_version_id }}
+
+      - name: apply config
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.4
+        if: fromJSON(steps.tf-run.outputs.payload).data.attributes.actions.IsConfirmable
+        id: tf-apply
+        with:
+          run: ${{ steps.tf-run.outputs.run_id }}
+          comment: "Apply run from GitHub Actions @ ${{ github.sha }}"
