@@ -15,6 +15,7 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
     domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
     origin_id   = local.s3_origin_id
+    origin_path = var.CLOUDFRONT_ORIGIN_PATH
   }
 
   enabled             = true
@@ -43,8 +44,8 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
 
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    default_ttl            = 60
+    max_ttl                = 300
   }
 
   restrictions {
