@@ -1,7 +1,6 @@
 import 'package:datalytics/components/custom_form_field.dart';
 import 'package:datalytics/components/main_button.dart';
 import 'package:datalytics/constants.dart';
-import 'package:datalytics/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -42,9 +41,7 @@ class _LoginFormState extends State<LoginForm> {
 
   void submitForm() {
     if(_formKey.currentState!.validate()){
-      Navigator.of(context).push(MaterialPageRoute(builder: (context){
-        return const HomeScreen();
-      }));
+      Navigator.pushNamed(context, '/home');
     }
   }
 
