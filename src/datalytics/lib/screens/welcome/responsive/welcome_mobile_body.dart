@@ -94,7 +94,7 @@ class _WelcomeMobileBodyState extends State<WelcomeMobileBody> {
                                   height: 40,
                                   textColor: dtlGrey100,
                                   borderRadius: 12,
-                                  onPress: (){},
+                                  onPress: () => Navigator.pushNamed(context, '/logon'),
                                 ),
                               ],
                             ),
@@ -163,7 +163,7 @@ class _WelcomeMobileBodyState extends State<WelcomeMobileBody> {
                   height: 40,
                   textColor: dtlGrey100,
                   borderRadius: 12,
-                  onPress: (){},
+                  onPress: () => Navigator.pushNamed(context, '/logon'),
                 ),
                 const SizedBox(height: 42,),
                 SizedBox(
