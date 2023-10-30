@@ -1,4 +1,5 @@
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/home/home_screen.dart';
 import 'package:datalytics/screens/login/login_screen.dart';
 import 'package:datalytics/screens/logon/logon_screen.dart';
 import 'package:datalytics/screens/welcome/welcome_screen.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const WelcomeScreen(),
         '/logon': (context) => const LogOnScreen(),
         '/login': (context) => const LogInScreen(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }
