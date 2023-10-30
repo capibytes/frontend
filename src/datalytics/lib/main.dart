@@ -1,9 +1,11 @@
 import 'package:datalytics/constants.dart';
+import 'package:datalytics/screens/blog/blog_screen.dart';
 import 'package:datalytics/screens/consultors/consultor_screen.dart';
 import 'package:datalytics/screens/home/home_screen.dart';
 import 'package:datalytics/screens/login/login_screen.dart';
 import 'package:datalytics/screens/logon/logon_screen.dart';
 import 'package:datalytics/screens/signup/signup_screen.dart';
+import 'package:datalytics/screens/userprofile/user_profile_screen.dart';
 import 'package:datalytics/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/consultors': (context) => const ConsultorsScreen(),
+        '/blog': (context) => BlogScreen(),
+        '/myprofile': (context) => const UserProfileScreen(),
       },
     );
   }
