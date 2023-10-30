@@ -5,20 +5,21 @@ class CustomFormField extends StatelessWidget {
   final String labelText;
   final bool hideText;
   final Widget? suffix;
+  final double? width;
   final String? Function(String?)? validate;
   const CustomFormField({
     required this.labelText,
     this.validate,
     this.hideText = false,
     this.suffix,
+    this.width,
     super.key
   });
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SizedBox(
-      width: (size.width / 4) - 60,
+      width: width,
       child: TextFormField(
         validator: validate,
         style: const TextStyle(
