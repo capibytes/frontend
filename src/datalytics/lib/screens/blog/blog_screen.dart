@@ -1,5 +1,4 @@
 import 'package:datalytics/components/blog_news.dart';
-import 'package:datalytics/components/gradient_background.dart';
 import 'package:datalytics/components/header.dart';
 import 'package:datalytics/constants.dart';
 import 'package:datalytics/models/blog_news_model.dart';
@@ -56,107 +55,128 @@ class BlogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        children: [
-          const GradientBackground(),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const Header(),
-                const SizedBox(height: 60,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Aprenda um pouco mais',
-                        style: TextStyle(
-                          color: dtlWhite,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 22,
-                        ),
-                      ),
-                      const Divider(thickness: 1,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double maxWidth = constraints.maxWidth;
+        double maxHeight = constraints.maxHeight;
+
+        return Scaffold(
+          body: Stack(
+            children: [
+              Image.asset(
+                'assets/images/background-img.png',
+                fit: BoxFit.cover,
+                height: maxHeight,
+                width: maxWidth,
+              ),
+              Container(
+                height: maxHeight,
+                width: maxWidth,
+                color: dtlBlack.withOpacity(0.7),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Header(),
+                    const SizedBox(height: 60,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Column(
+                        crossAxisAlignment: maxWidth < 1200 ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: ((size.width /4) * 3) - 80,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              primary: false,
-                              itemCount: news.length,
-                              itemBuilder: (context, index) {
-                                BlogNewsModel blogNews = news[index];
-                                return Column(
-                                  children: [
-                                    BlogNews(blogNews: blogNews),
-                                    const Divider(thickness: 1,),
-                                  ],
-                                );
-                              }
+                          const Text(
+                            'Aprenda um pouco mais',
+                            style: TextStyle(
+                              color: dtlWhite,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            width: ((size.width /4) - 80),
-                            decoration: BoxDecoration(
-                              color: dtlBrow200,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Notícias',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: dtlGrey100,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                ListView.builder(
+                          const Divider(thickness: 1,),
+                          Row(
+                            mainAxisAlignment: maxWidth < 1200 ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: maxWidth < 1200 ? maxWidth * 0.6 : ((size.width /4) * 3) - 80,
+                                child: ListView.builder(
                                   shrinkWrap: true,
                                   primary: false,
-                                  itemCount: sideNewsLinks.length,
-                                  itemBuilder: (context, index){
+                                  itemCount: news.length,
+                                  itemBuilder: (context, index) {
+                                    BlogNewsModel blogNews = news[index];
                                     return Column(
                                       children: [
-                                        const Divider(thickness: 1,),
-                                        TextButton(
-                                          onPressed: (){},
-                                          child: Text(
-                                            sideNewsLinks[index].title,
-                                            maxLines: 5,
-                                            textAlign: TextAlign.start,
-                                            style: const TextStyle(
-                                              color: dtlGrey100,
-                                              fontSize: 12,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
+                                        BlogNews(
+                                          blogNews: blogNews,
+                                          width: maxWidth < 1200 ? maxWidth * 0.6 : ((size.width /4) * 3) - 80,
                                         ),
+                                        const Divider(thickness: 1,),
                                       ],
                                     );
                                   }
                                 ),
-                              ],
-                            ),
+                              ),
+                              constraints.maxWidth < 1200 ? Container() : 
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                width: ((size.width /4) - 80),
+                                decoration: BoxDecoration(
+                                  color: dtlBrow200,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'Notícias',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: dtlGrey100,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      primary: false,
+                                      itemCount: sideNewsLinks.length,
+                                      itemBuilder: (context, index){
+                                        return Column(
+                                          children: [
+                                            const Divider(thickness: 1,),
+                                            TextButton(
+                                              onPressed: (){},
+                                              child: Text(
+                                                sideNewsLinks[index].title,
+                                                maxLines: 5,
+                                                textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                  color: dtlGrey100,
+                                                  fontSize: 12,
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),        
-        ],
-      ),
+              ),        
+            ],
+          ),
+        );
+      }
     );
   }
 }

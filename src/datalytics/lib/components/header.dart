@@ -1,9 +1,5 @@
 import 'package:datalytics/components/top_bar_button_text_option.dart';
 import 'package:datalytics/constants.dart';
-import 'package:datalytics/screens/blog/blog_screen.dart';
-import 'package:datalytics/screens/consultors/consultor_screen.dart';
-import 'package:datalytics/screens/home/home_screen.dart';
-import 'package:datalytics/screens/userprofile/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
@@ -22,15 +18,11 @@ class Header extends StatelessWidget {
         children: [
           InkWell(
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.pushNamed(context, '/home');
             },
-            child: const Text(
-              'Datalytics',
-              style: TextStyle(
-                fontSize: 26,
-                color: dtlGreyBlue,
-                fontWeight: FontWeight.w600,
-              ),
+            child: Image.asset(
+              'assets/images/main-logo.png',
+              height: 38,
             ),
           ),
           Row(
@@ -39,20 +31,18 @@ class Header extends StatelessWidget {
               TopBarButtonTextOption(
                 title: 'Blog',
                 onPress: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlogScreen()));
+                  Navigator.pushNamed(context, '/blog');
                 },
               ),
-              const TopBarButtonTextOption(title: 'LGPD'),
-              const TopBarButtonTextOption(title: 'Sobre'),
               TopBarButtonTextOption(
                 title: 'Consultores',
                 onPress: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ConsultorsScreen()));
+                  Navigator.pushNamed(context, '/consultors');
                 },
               ),
               InkWell(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserProfileScreen()));
+                  Navigator.pushNamed(context, '/myprofile');
                 },
                 child: Container(
                   width: 48,

@@ -1,4 +1,3 @@
-import 'package:datalytics/components/gradient_background.dart';
 import 'package:datalytics/components/header.dart';
 import 'package:datalytics/constants.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -9,163 +8,184 @@ class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const GradientBackground(),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const Header(),
-                const SizedBox(height: 60,),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: dtlBlack.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double maxWidth = constraints.maxWidth;
+        double maxHeight = constraints.maxHeight;
+
+        return Scaffold(
+          body: Stack(
+            children: [
+              Image.asset(
+                'assets/images/background-img.png',
+                fit: BoxFit.cover,
+                height: maxHeight,
+                width: maxWidth,
+              ),
+              Container(
+                height: maxHeight,
+                width: maxWidth,
+                color: dtlBlack.withOpacity(0.7),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Header(),
+                    const SizedBox(height: 60,),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: dtlBlack.withOpacity(0.4),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 120,
-                              height: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Image.asset(
-                                'assets/images/consultor_example.png',
-                                fit: BoxFit.cover,
+                            Row(
+                              children: [
+                                Container(
+                                  width: 120,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/consultor_example.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(width: 12,),
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Jean Da Silva Sauro',
+                                      style: TextStyle(
+                                        color: dtlWhite,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Advogado',
+                                      style: TextStyle(
+                                        color: dtlWhite,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    Text(
+                                      'E-commerce',
+                                      style: TextStyle(
+                                        color: dtlWhite,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 40,),
+                            RichText(
+                              text: const TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'E-mail: ',
+                                    style: TextStyle(
+                                      color: dtlWhite,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'jeandasilva@gmail.com',
+                                    style: TextStyle(
+                                      color: dtlWhite,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ]
                               ),
                             ),
-                            const SizedBox(width: 12,),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            const SizedBox(height: 14,),
+                            OutlinedButton(
+                              onPressed: (){}, 
+                              child: const Text(
+                                'Alterar senha',
+                                style: TextStyle(
+                                  color: dtlGrey100,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ),
+                            const SizedBox(height: 40,),
+                            const Text(
+                              'Sobre: ',
+                              style: TextStyle(
+                                color: dtlWhite,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 18,),
+                            const Text(
+                              'Minha abordagem é holística. Começo por entender a sua estrutura e processos para identificar potenciais riscos e vulnerabilidades. Em seguida, desenvolvo estratégias de segurança robustas e eficazes, que podem incluir treinamento de funcionários, implementação de tecnologias avançadas, elaboração de políticas de segurança e planos de resposta a incidentes.',
+                              style: TextStyle(
+                                color: dtlWhite,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 60,),
+                            const Text(
+                              'Links: ',
+                              style: TextStyle(
+                                color: dtlWhite,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const Row(
                               children: [
-                                Text(
-                                  'Jean Da Silva Sauro',
-                                  style: TextStyle(
-                                    color: dtlWhite,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18,
-                                  ),
+                                Icon(
+                                  PhosphorIcons.instagram_logo,
+                                  color: dtlGrey100,
+                                  size: 45,
                                 ),
-                                Text(
-                                  'Advogado',
-                                  style: TextStyle(
-                                    color: dtlWhite,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                  ),
+                                SizedBox(width: 8,),
+                                Icon(
+                                  PhosphorIcons.linkedin_logo,
+                                  color: dtlGrey100,
+                                  size: 45,
                                 ),
-                                Text(
-                                  'E-commerce',
-                                  style: TextStyle(
-                                    color: dtlWhite,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 14,
-                                  ),
+                                SizedBox(width: 8,),
+                                Icon(
+                                  PhosphorIcons.browser,
+                                  color: dtlGrey100,
+                                  size: 45,
+                                ),
+                                SizedBox(width: 8,),
+                                Icon(
+                                  PhosphorIcons.plus,
+                                  color: dtlGrey100,
+                                  size: 36,
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        const SizedBox(height: 40,),
-                        RichText(
-                          text: const TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'E-mail: ',
-                                style: TextStyle(
-                                  color: dtlWhite,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              TextSpan(
-                                text: 'jeandasilva@gmail.com',
-                                style: TextStyle(
-                                  color: dtlWhite,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ]
-                          ),
-                        ),
-                        const SizedBox(height: 14,),
-                        OutlinedButton(
-                          onPressed: (){}, 
-                          child: const Text(
-                            'Alterar senha',
-                            style: TextStyle(
-                              color: dtlGrey100,
-                              fontSize: 12,
-                            ),
-                          )
-                        ),
-                        const SizedBox(height: 40,),
-                        const Text(
-                          'Sobre: ',
-                          style: TextStyle(
-                            color: dtlWhite,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(height: 18,),
-                        const Text(
-                          'Introdução sobre as experiências e especialidade do consultor.',
-                          style: TextStyle(
-                            color: dtlWhite,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 60,),
-                        const Text(
-                          'Links: ',
-                          style: TextStyle(
-                            color: dtlWhite,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const Row(
-                          children: [
-                            Icon(
-                              PhosphorIcons.instagram_logo,
-                              size: 45,
-                            ),
-                            SizedBox(width: 8,),
-                            Icon(
-                              PhosphorIcons.linkedin_logo,
-                              size: 45,
-                            ),
-                            SizedBox(width: 8,),
-                            Icon(
-                              PhosphorIcons.browser,
-                              size: 45,
-                            ),
-                            SizedBox(width: 8,),
-                            Icon(
-                              PhosphorIcons.plus,
-                              size: 36,
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      }
     );
   }
 }
