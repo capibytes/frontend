@@ -10,7 +10,7 @@ on:
 env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_CLOUD_ORGANIZATION: "capibytes"
-  TF_WORKSPACE: "datalytics-backend"
+  TF_WORKSPACE: "datalytics-frontend"
   CONFIG_DIRECTORY: "./terraform"
 
 jobs:

@@ -15,13 +15,14 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
     domain_name = aws_s3_bucket.frontend.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
     origin_id   = local.s3_origin_id
+    origin_path = var.CLOUDFRONT_ORIGIN_PATH
   }
 
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
-  aliases             = ["datalytics.devs2blu.dev.br", "www.datalytics.devs2blu.dev.br"]
+  aliases             = [local.dominio, "www.${local.dominio}"]
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate_validation.cert_validation.certificate_arn
     ssl_support_method       = "sni-only"
@@ -43,8 +44,8 @@ resource "aws_cloudfront_distribution" "frontend_distribution" {
 
     viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    default_ttl            = 60
+    max_ttl                = 300
   }
 
   restrictions {

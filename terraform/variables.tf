@@ -6,6 +6,11 @@ variable "TFC_AWS_RUN_ROLE_ARN" {
   description = "ARN da role de acesso AWS"
 }
 
+variable "CLOUDFRONT_ORIGIN_PATH" {
+  description = "Caminho do bucket com a última versão dos arquivos"
+  default = ""
+}
+
 locals {
   region = "us-east-1"
   app_name = "datalytics"
